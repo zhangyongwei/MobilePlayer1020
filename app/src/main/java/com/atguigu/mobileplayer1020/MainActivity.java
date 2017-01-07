@@ -62,13 +62,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //当前的Fragment--
                 Fragment currentFragment = fragments.get(position);
-                swichFrgment(currentFragment);
+                swichFragment(currentFragment);
             }
         });
         //默认选中本地视频
         rg_main.check(R.id.rb_local_video);//onCheckedChanged
     }
-    private void swichFrgment(Fragment currentFragment) {
+    private void swichFragment(Fragment currentFragment) {
 
         if(tempFragment!=currentFragment){
             //开启事物

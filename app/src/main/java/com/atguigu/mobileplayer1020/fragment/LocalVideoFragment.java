@@ -1,17 +1,21 @@
 package com.atguigu.mobileplayer1020.fragment;
 
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.atguigu.mobileplayer1020.R;
+import com.atguigu.mobileplayer1020.activity.SystemVideoPlayerActivity;
 import com.atguigu.mobileplayer1020.adapter.LocalVideoAdapter;
 import com.atguigu.mobileplayer1020.base.BaseFragment;
 import com.atguigu.mobileplayer1020.bean.MediaItem;
@@ -67,9 +71,30 @@ public class LocalVideoFragment extends BaseFragment {
         View view = View.inflate(mContext, R.layout.fragment_local_vedio,null);
         listView = (ListView) view.findViewById(R.id.listView);
         tv_no_media = (TextView) view.findViewById(R.id.tv_no_media);
+
+        //设置监听
+        listView.setOnItemClickListener(new MyOnItemClickListener());
         return view;
     }
 
+    class MyOnItemClickListener implements AdapterView.OnItemClickListener{
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            MediaItem mediaItem = mediaItems.get(position);
+            //调起自定义播放器
+            Intent intent = new Intent(mContext, SystemVideoPlayerActivity.class);
+            Bundle bundle = new Bundle();
+            //列表数据
+            bundle.putSerializable("videolist",mediaItems);
+            intent.putExtras(bundle);
+            //传递点击的位置
+            intent.putExtra("position",position);
+            startActivity(intent);
+
+        }
+    }
     @Override
     protected void initData() {
         super.initData();
@@ -103,7 +128,7 @@ public class LocalVideoFragment extends BaseFragment {
                 };
 
                 Cursor cursor = resolver.query(uri, objs, null, null, null);
-                if(cursor!=null){
+                  if(cursor!=null){
 
                     while (cursor.moveToNext()){
 

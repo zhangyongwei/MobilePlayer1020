@@ -7,13 +7,46 @@ import java.io.Serializable;
  * 代码的一个视频或者音频
  */
 
-public class MediaItem  implements Serializable{
+public class MediaItem implements Serializable {
 
     String name;
     long duration;
     long size;
     String data;
     String artist;
+    /**
+     * 图片路径
+     */
+    String imageUrl;
+    /**
+     * 描述
+     */
+    String desc;
+    String heightUrl;
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getHeightUrl() {
+        return heightUrl;
+    }
+
+    public void setHeightUrl(String heightUrl) {
+        this.heightUrl = heightUrl;
+    }
 
     public String getName() {
         return name;
@@ -63,6 +96,9 @@ public class MediaItem  implements Serializable{
                 ", size=" + size +
                 ", data='" + data + '\'' +
                 ", artist='" + artist + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", desc='" + desc + '\'' +
+                ", heightUrl='" + heightUrl + '\'' +
                 '}';
     }
 }
